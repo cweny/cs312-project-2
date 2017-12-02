@@ -337,6 +337,7 @@ player_vs_ai depth board color boarder = do
 			then
 				do
 				putStrLn "Move for White player:"
+				putStrLn ("Suggested Move: " ++ show (get_aimove board color depth movelist))
 				putStrLn $ List.concat $ List.map show (get_allowedmove board color movelist)
 				wm <- whiteMove
 				if is_allowedmove board White wm
