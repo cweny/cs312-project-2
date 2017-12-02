@@ -72,12 +72,10 @@ toflip_indirection :: Board -> Color -> [Move] -> [Move]
 toflip_indirection _ _ [] = []
 toflip_indirection _ _ (_:[]) = []
 toflip_indirection b p pl 
-	| beginning /= [] && fst (head beginning) == p = List.map snd toFlip
+	| top /= [] && fst (head top) == p = List.map snd (List.takeWhile (\x -> fst x == other_color p) (zip (get_colors b pl) pl))
 	| otherwise = []
 	where 
-		colorandpos = zip (get_colors b pl) pl
-		toFlip = List.takeWhile (\x -> fst x == other_color p) colorandpos
-		beginning = List.dropWhile (\x -> fst x == other_color p) colorandpos  
+		top = List.dropWhile (\x -> fst x == other_color p) (zip (get_colors b pl) pl)
 
 -- Counts number of pieces for player with color on the board.
 count_colors :: Board -> Color -> Int
